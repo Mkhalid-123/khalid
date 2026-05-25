@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard | Student System</title>
+    <meta name="description" content="Teacher dashboard — manage assignments, quizzes, tasks and students">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="teacherdashboard.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+    <div class="topbar-left">
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+        <a href="teacherdashboard.html" class="brand-logo">
+            <div class="logo-icon-wrap">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <span class="brand-name">EduSystem</span>
+        </a>
+    </div>
+    <div class="topbar-right">
+        <div class="topbar-badge">
+            <i class="fa-solid fa-chalkboard-teacher"></i>
+            <span>Teacher</span>
+        </div>
+        <button class="logout-btn" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </button>
+    </div>
+</header>
+
+<div class="main">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-section-label">Navigation</div>
+        <ul>
+            <li class="active">
+                <div class="menu-left">
+                    <i class="fa-solid fa-house"></i>
+                    <a href="teacherdashboard.html"><span>Dashboard</span></a>
+                </div>
+            </li>
+            <li>
+                <div class="menu-left">
+                    <i class="fa-solid fa-book-open"></i>
+                    <a href="./teacherassignment.html"><span>Assignments</span></a>
+                </div>
+                <button class="add-btn" onclick="openAssignForm()"><i class="fa-solid fa-plus"></i></button>
+            </li>
+            <li>
+                <div class="menu-left">
+                    <i class="fa-solid fa-clipboard-question"></i>
+                    <a href="./teacherquiz.html"><span>Quizzes</span></a>
+                </div>
+                <button class="add-btn" onclick="openQuizForm()"><i class="fa-solid fa-plus"></i></button>
+            </li>
+            <li>
+                <div class="menu-left">
+                    <i class="fa-solid fa-list-check"></i>
+                    <a href="./teachertasks.html"><span>Tasks</span></a>
+                </div>
+                <button class="add-btn" onclick="openTaskForm()"><i class="fa-solid fa-plus"></i></button>
+            </li>
+            <li>
+                <div class="menu-left">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <a href="./teacherstudent.html"><span>Students</span></a>
+                </div>
+                <button class="add-btn" onclick="openStudentForm()"><i class="fa-solid fa-plus"></i></button>
+            </li>
+            <li>
+                <div class="menu-left">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Marks</span>
+                </div>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- CONTENT -->
+    <section class="content">
+
+        <!-- Welcome Banner -->
+        <div class="welcome-banner teacher-banner">
+            <h2>Welcome, Professor! 👨‍🏫</h2>
+            <p>Manage your class — assignments, quizzes, tasks, students and more.</p>
+            <div class="banner-emoji">📚</div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card indigo">
+                <div class="stat-icon"><i class="fa-solid fa-user-graduate"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Students</div>
+                    <div class="stat-value">—</div>
+                    <div class="stat-sub">Enrolled</div>
+                </div>
+            </div>
+            <div class="stat-card emerald">
+                <div class="stat-icon"><i class="fa-solid fa-book-open"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Assignments</div>
+                    <div class="stat-value">—</div>
+                    <div class="stat-sub">Posted</div>
+                </div>
+            </div>
+            <div class="stat-card amber">
+                <div class="stat-icon"><i class="fa-solid fa-clipboard-question"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Quizzes</div>
+                    <div class="stat-value">—</div>
+                    <div class="stat-sub">Scheduled</div>
+                </div>
+            </div>
+            <div class="stat-card sky">
+                <div class="stat-icon"><i class="fa-solid fa-list-check"></i></div>
+                <div class="stat-info">
+                    <div class="stat-label">Tasks</div>
+                    <div class="stat-value">—</div>
+                    <div class="stat-sub">Active</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="section-card">
+            <div class="section-card-header">
+                <h3>Quick Actions</h3>
+            </div>
+            <div class="quick-grid">
+                <a href="./teacherassignment.html" class="quick-card">
+                    <div class="quick-icon" style="background:rgba(99,102,241,0.15);color:#818cf8;">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <div class="quick-label">Assignments</div>
+                    <div class="quick-desc">Create & manage</div>
+                </a>
+                <a href="./teacherquiz.html" class="quick-card">
+                    <div class="quick-icon" style="background:rgba(16,185,129,0.15);color:#10b981;">
+                        <i class="fa-solid fa-clipboard-question"></i>
+                    </div>
+                    <div class="quick-label">Quizzes</div>
+                    <div class="quick-desc">Schedule quizzes</div>
+                </a>
+                <a href="./teachertasks.html" class="quick-card">
+                    <div class="quick-icon" style="background:rgba(245,158,11,0.15);color:#f59e0b;">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+                    <div class="quick-label">Tasks</div>
+                    <div class="quick-desc">Assign tasks</div>
+                </a>
+                <a href="./teacherstudent.html" class="quick-card">
+                    <div class="quick-icon" style="background:rgba(168,85,247,0.15);color:#a855f7;">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+                    <div class="quick-label">Students</div>
+                    <div class="quick-desc">View class roster</div>
+                </a>
+                <div class="quick-card" style="cursor:default;opacity:0.5;">
+                    <div class="quick-icon" style="background:rgba(244,63,94,0.15);color:#f43f5e;">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div class="quick-label">Marks</div>
+                    <div class="quick-desc">Coming soon</div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+<!-- MODALS -->
+<div class="form-overlay" id="formOverlay" onclick="closeAllForms()"></div>
+
+<!-- Assignment Modal -->
+<div class="assignment-form-modal" id="assignmentForm">
+    <div class="form-header">
+        <h3>Add Assignment</h3>
+        <button class="close-btn" onclick="closeAllForms()">×</button>
+    </div>
+    <form onsubmit="saveAssignment(event)">
+        <input type="text" placeholder="Assignment Title" required>
+        <input type="text" placeholder="Subject" required>
+        <input type="date" required>
+        <input type="number" placeholder="Total Marks" min="1">
+        <textarea placeholder="Description (Optional)" rows="3"></textarea>
+        <button id="save" type="submit">Save Assignment</button>
+    </form>
+</div>
+
+<!-- Quiz Modal -->
+<div class="assignment-form-modal" id="quizForm">
+    <div class="form-header">
+        <h3>Add Quiz</h3>
+        <button class="close-btn" onclick="closeAllForms()">×</button>
+    </div>
+    <form>
+        <input type="text" placeholder="Quiz Title" required>
+        <input type="text" placeholder="Subject" required>
+        <input type="number" placeholder="Total Questions" min="1" required>
+        <input type="number" placeholder="Total Marks" min="1">
+        <input type="date" placeholder="Quiz Date" required>
+        <button type="submit">Save Quiz</button>
+    </form>
+</div>
+
+<!-- Task Modal -->
+<div class="assignment-form-modal" id="taskForm">
+    <div class="form-header">
+        <h3>Add Task</h3>
+        <button class="close-btn" onclick="closeAllForms()">×</button>
+    </div>
+    <form>
+        <input type="text" placeholder="Task Title" required>
+        <input type="text" placeholder="Subject" required>
+        <input type="date" placeholder="Due Date" required>
+        <textarea placeholder="Task Details (Optional)" rows="3"></textarea>
+        <button type="submit">Save Task</button>
+    </form>
+</div>
+
+<!-- Student Modal -->
+<div class="assignment-form-modal" id="studentForm">
+    <div class="form-header">
+        <h3>Add Student</h3>
+        <button class="close-btn" onclick="closeAllForms()">×</button>
+    </div>
+    <form>
+        <input type="text" placeholder="Student Name" required>
+        <input type="text" placeholder="Roll Number" required>
+        <input type="email" placeholder="Email" required>
+        <input type="text" placeholder="Class/Grade" required>
+        <button type="submit">Save Student</button>
+    </form>
+</div>
+
+<script>
+function openAssignForm() {
+    closeAllForms();
+    document.getElementById('assignmentForm').classList.add('active');
+    document.getElementById('formOverlay').classList.add('active');
+}
+function openQuizForm() {
+    closeAllForms();
+    document.getElementById('quizForm').classList.add('active');
+    document.getElementById('formOverlay').classList.add('active');
+}
+function openTaskForm() {
+    closeAllForms();
+    document.getElementById('taskForm').classList.add('active');
+    document.getElementById('formOverlay').classList.add('active');
+}
+function openStudentForm() {
+    closeAllForms();
+    document.getElementById('studentForm').classList.add('active');
+    document.getElementById('formOverlay').classList.add('active');
+}
+function closeAllForms() {
+    ['assignmentForm','quizForm','taskForm','studentForm'].forEach(id => {
+        document.getElementById(id).classList.remove('active');
+    });
+    document.getElementById('formOverlay').classList.remove('active');
+}
+function logout() { window.location.href = "signin.html"; }
+
+// Hamburger
+const hamburger = document.getElementById('hamburger');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebarOverlay');
+hamburger.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('active');
+});
+overlay.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+});
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="config.js"></script>
+<script src="teacherassignment.js"></script>
+</body>
+</html>

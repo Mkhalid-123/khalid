@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzes | Student System</title>
+    <meta name="description" content="Student quizzes — view and take quizzes">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="studentquizes.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+    <div class="topbar-left">
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+        <a href="student.html" class="brand-logo">
+            <div class="logo-icon-wrap">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <span class="brand-name">EduSystem</span>
+        </a>
+    </div>
+    <div class="topbar-right">
+        <div class="topbar-badge">
+            <i class="fa-solid fa-circle-user"></i>
+            <span>Student</span>
+        </div>
+        <button class="logout-btn" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </button>
+    </div>
+</header>
+
+<div class="main">
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-section-label">Navigation</div>
+        <ul>
+            <li>
+                <div class="menu-left">
+                    <i class="fa-solid fa-house"></i>
+                    <a href="student.html"><span>Dashboard</span></a>
+                </div>
+            </li>
+            <li>
+                <div class="menu-left">
+                    <i class="fa-solid fa-book-open"></i>
+                    <a href="./studentassignment.html"><span>Assignments</span></a>
+                </div>
+            </li>
+            <li class="active">
+                <div class="menu-left">
+                    <i class="fa-solid fa-clipboard-question"></i>
+                    <a href="./studentquizes.html"><span>Quizzes</span></a>
+                </div>
+            </li>
+            <li>
+                <div class="menu-left">
+                    <i class="fa-solid fa-list-check"></i>
+                    <a href="./studenttasks.html"><span>Tasks</span></a>
+                </div>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- CONTENT -->
+    <section class="content">
+        <div class="page-header">
+            <h2>❓ Quizzes</h2>
+            <p>View and take your quizzes</p>
+        </div>
+
+        <div class="welcome-card"></div>
+    </section>
+</div>
+
+<script>
+function logout() {
+    window.location.href = "signin.html";
+}
+
+// Hamburger menu
+const hamburger = document.getElementById('hamburger');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebarOverlay');
+
+hamburger.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('active');
+});
+overlay.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+});
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="studentquizes.js"></script>
+
+</body>
+</html>

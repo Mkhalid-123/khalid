@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher — Students | Student System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="teacherstudent.css">
+    <link rel="stylesheet" href="chatbot.css">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="topbar-left">
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+        <a href="teacherdashboard.html" class="brand-logo">
+            <div class="logo-icon-wrap"><i class="fa-solid fa-graduation-cap"></i></div>
+            <span class="brand-name">EduSystem</span>
+        </a>
+    </div>
+    <div class="topbar-right">
+        <div class="topbar-badge"><i class="fa-solid fa-chalkboard-teacher"></i><span>Teacher</span></div>
+        <button class="logout-btn" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i><span>Logout</span>
+        </button>
+    </div>
+</header>
+
+<div class="main">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-section-label">Navigation</div>
+        <ul>
+            <li>
+                <div class="menu-left">
+                    <i class="fa-solid fa-house"></i>
+                    <a href="teacherdashboard.html"><span>Dashboard</span></a>
+                </div>
+            </li>
+            <li>
+                <div class="menu-left">
+                    <i class="fa-solid fa-book-open"></i>
+                    <a href="./teacherassignment.html"><span>Assignments</span></a>
+                </div>
+            </li>
+            <li>
+                <div class="menu-left">
+                    <i class="fa-solid fa-clipboard-question"></i>
+                    <a href="./teacherquiz.html"><span>Quizzes</span></a>
+                </div>
+            </li>
+            <li>
+                <div class="menu-left">
+                    <i class="fa-solid fa-list-check"></i>
+                    <a href="./teachertasks.html"><span>Tasks</span></a>
+                </div>
+            </li>
+            <li class="active">
+                <div class="menu-left">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <a href="./teacherstudent.html"><span>Students</span></a>
+                </div>
+            </li>
+            <li>
+                <div class="menu-left">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Marks</span>
+                </div>
+            </li>
+        </ul>
+    </aside>
+
+    <section class="content">
+        <div class="page-header">
+            <h2>🎓 Students</h2>
+            <p>Manage enrolled students</p>
+        </div>
+        <div class="welcome-card"></div>
+    </section>
+</div>
+
+<!-- MODALS -->
+<div class="form-overlay" id="formOverlay" onclick="closeAllForms()"></div>
+
+<div class="assignment-form-modal" id="assignmentForm">
+    <div class="form-header">
+        <h3>Add Assignment</h3>
+        <button class="close-btn" onclick="closeAllForms()">×</button>
+    </div>
+    <form onsubmit="saveAssignment(event)">
+        <input type="text" placeholder="Assignment Title" required>
+        <input type="text" placeholder="Subject" required>
+        <input type="date" required>
+        <input type="number" placeholder="Total Marks" min="1">
+        <textarea placeholder="Description (Optional)" rows="3"></textarea>
+        <button type="submit">Save Assignment</button>
+    </form>
+</div>
+
+<div class="assignment-form-modal" id="quizForm">
+    <div class="form-header">
+        <h3>Add Quiz</h3>
+        <button class="close-btn" onclick="closeAllForms()">×</button>
+    </div>
+    <form onsubmit="saveQuiz(event)">
+        <input type="text" placeholder="Quiz Title" required>
+        <input type="text" placeholder="Subject" required>
+        <input type="number" placeholder="Total Questions" min="1" required>
+        <input type="number" placeholder="Total Marks" min="1">
+        <input type="date" placeholder="Quiz Date" required>
+        <button type="submit">Save Quiz</button>
+    </form>
+</div>
+
+<div class="assignment-form-modal" id="taskForm">
+    <div class="form-header">
+        <h3>Add Task</h3>
+        <button class="close-btn" onclick="closeAllForms()">×</button>
+    </div>
+    <form onsubmit="saveTask(event)">
+        <input type="text" placeholder="Task Title" required>
+        <input type="text" placeholder="Subject" required>
+        <input type="date" placeholder="Due Date" required>
+        <textarea placeholder="Task Details (Optional)" rows="3"></textarea>
+        <button type="submit">Save Task</button>
+    </form>
+</div>
+
+<div class="assignment-form-modal" id="studentForm">
+    <div class="form-header">
+        <h3>Add Student</h3>
+        <button class="close-btn" onclick="closeAllForms()">×</button>
+    </div>
+    <form onsubmit="saveStudent(event)">
+        <input type="text" placeholder="Student Name" required>
+        <input type="text" placeholder="Roll Number" required>
+        <input type="email" placeholder="Email" required>
+        <input type="text" placeholder="Class/Grade" required>
+        <button type="submit">Save Student</button>
+    </form>
+</div>
+
+<!-- AI Chatbot -->
+<input type="checkbox" id="chatbot-toggle-cb" autocomplete="off">
+<label for="chatbot-toggle-cb" class="chatbot-trigger" title="Ask AI Assistant">
+    <i class="fa-solid fa-robot"></i>
+</label>
+<div class="chatbot-panel" id="chatbot-panel">
+    <div class="chatbot-header">
+        <div class="chatbot-header-info">
+            <div class="chatbot-avatar"><i class="fa-solid fa-brain"></i></div>
+            <div class="chatbot-title-group">
+                <h3>ChatGPT AI</h3>
+                <div class="chatbot-status">
+                    <span class="chatbot-status-dot"></span>
+                    <span>Assistant Online</span>
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-header-actions">
+            <label for="chatbot-toggle-cb" class="chatbot-action-btn" title="Close Panel">
+                <i class="fa-solid fa-xmark"></i>
+            </label>
+        </div>
+    </div>
+    <div class="chatbot-messages" id="chatbot-messages">
+        <div class="chatbot-msg bot">
+            <div class="chatbot-msg-avatar"><i class="fa-solid fa-robot"></i></div>
+            <div class="chatbot-msg-bubble">
+                <p>Welcome Professor! 🎓 I can help you track student progress or analyze class performance.</p>
+            </div>
+        </div>
+    </div>
+    <div class="chatbot-suggestions-container">
+        <div class="chatbot-suggestions-label">Suggested Actions</div>
+        <div class="chatbot-suggestions" id="chatbot-suggestions">
+            <div class="chatbot-chip">Add Student 📝</div>
+            <div class="chatbot-chip">Class Performance 📊</div>
+            <div class="chatbot-chip">Engagement Tips 🧠</div>
+            <div class="chatbot-chip">Student Behavior 💯</div>
+        </div>
+    </div>
+    <div class="chatbot-input-container">
+        <form id="chatbot-form" onsubmit="return false;">
+            <div class="chatbot-input-wrapper">
+                <input type="text" id="chatbot-input" placeholder="Type your query..." autocomplete="off">
+                <button onclick="chat()" type="submit" class="chatbot-send-btn" id="chatbot-send-btn">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.getElementById('chatbot-toggle-cb').checked = false;
+
+function closeAllForms() {
+    ['assignmentForm','quizForm','taskForm','studentForm'].forEach(id => {
+        document.getElementById(id).classList.remove('active');
+    });
+    document.getElementById('formOverlay').classList.remove('active');
+}
+function openStudentForm() {
+    closeAllForms();
+    document.getElementById('studentForm').classList.add('active');
+    document.getElementById('formOverlay').classList.add('active');
+}
+
+const hamburger = document.getElementById('hamburger');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebarOverlay');
+hamburger.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('active');
+});
+overlay.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+});
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<SCRIpt src="config.js"></SCRIpt>
+<script src="teacherstudent.js"></script>
+</body>
+</html>

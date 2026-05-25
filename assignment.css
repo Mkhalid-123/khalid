@@ -1,0 +1,176 @@
+/* ============================================
+   ASSIGNMENT PAGE-SPECIFIC STYLES
+   Works with dashboard.css for base layout
+   ============================================ */
+
+/* FORM MODAL */
+.form-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+}
+
+.form-overlay.active {
+    display: block;
+}
+
+.assignment-form-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 420px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.assignment-form-modal.active {
+    display: block;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -45%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+}
+
+.form-header h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: background 0.3s;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.assignment-form-modal form {
+    padding: 25px;
+}
+
+.assignment-form-modal input,
+.assignment-form-modal textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: all 0.3s;
+    color: #1e293b;
+}
+
+.assignment-form-modal input:focus,
+.assignment-form-modal textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.assignment-form-modal textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.assignment-form-modal button[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s;
+    margin-top: 5px;
+}
+
+.assignment-form-modal button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+/* Mobile adjustments */
+@media (max-width: 900px) {
+    .add-btn {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .add-btn {
+        width: 26px;
+        height: 26px;
+        border-radius: 6px;
+    }
+
+    .assignment-form-modal {
+        width: 95%;
+        max-width: none;
+    }
+
+    .form-header {
+        padding: 15px 20px;
+    }
+
+    .form-header h3 {
+        font-size: 1.1rem;
+    }
+
+    .assignment-form-modal form {
+        padding: 20px;
+    }
+
+    .assignment-form-modal input,
+    .assignment-form-modal textarea {
+        padding: 10px 12px;
+        margin-bottom: 12px;
+        font-size: 16px;
+    }
+
+    .assignment-form-modal button[type="submit"] {
+        padding: 12px;
+    }
+}

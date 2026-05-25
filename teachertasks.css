@@ -1,0 +1,204 @@
+/* ============================================
+   TEACHER TASKS PAGE-SPECIFIC STYLES
+   Works with dashboard.css for base layout
+   ============================================ */
+
+/* FORM MODAL */
+.form-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+}
+
+.form-overlay.active {
+    display: block;
+}
+
+.assignment-form-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 450px;
+    max-height: 90vh;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.assignment-form-modal.active {
+    display: block;
+    animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -48%) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+}
+
+.form-header h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg) scale(1.1);
+}
+
+.assignment-form-modal form {
+    padding: 25px;
+    max-height: calc(90vh - 70px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) #f1f5f9;
+}
+
+.assignment-form-modal form::-webkit-scrollbar {
+    width: 6px;
+}
+
+.assignment-form-modal form::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+}
+
+.assignment-form-modal form::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 3px;
+}
+
+.assignment-form-modal input,
+.assignment-form-modal textarea,
+.assignment-form-modal select {
+    width: 100%;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+    color: #1e293b;
+    box-sizing: border-box;
+}
+
+.assignment-form-modal input:focus,
+.assignment-form-modal textarea:focus,
+.assignment-form-modal select:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.assignment-form-modal textarea {
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+}
+
+.assignment-form-modal button[type="submit"] {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.assignment-form-modal button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+}
+
+.assignment-form-modal button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* Mobile adjustments */
+@media (max-width: 900px) {
+    .assignment-form-modal {
+        max-width: 420px;
+    }
+}
+
+@media (max-width: 480px) {
+    .assignment-form-modal {
+        width: 95%;
+        max-width: none;
+        max-height: 85vh;
+    }
+
+    .form-header {
+        padding: 15px 20px;
+    }
+
+    .form-header h3 {
+        font-size: 1.1rem;
+    }
+
+    .assignment-form-modal form {
+        padding: 20px;
+        max-height: calc(85vh - 60px);
+    }
+
+    .assignment-form-modal input,
+    .assignment-form-modal textarea,
+    .assignment-form-modal select {
+        padding: 12px;
+        margin-bottom: 12px;
+        font-size: 16px;
+    }
+
+    .assignment-form-modal button[type="submit"] {
+        padding: 14px;
+        font-size: 16px;
+    }
+}

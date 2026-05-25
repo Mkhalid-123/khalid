@@ -1,0 +1,118 @@
+/* ── Teacher Assignment page-specific styles ── */
+
+/* Toolbar above cards */
+.content-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 16px rgba(99,102,241,0.3);
+}
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(99,102,241,0.4);
+}
+
+/* Assignment cards grid */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+/* Styles for dynamically generated cards (teacherassignment.js) */
+.assignment-card {
+    background: #111827;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 20px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+.assignment-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #6366f1, #a855f7);
+    border-radius: 3px 3px 0 0;
+}
+.assignment-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(99,102,241,0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+.assignment-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin-bottom: 8px;
+}
+.assignment-card p {
+    font-size: 0.82rem;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+.card-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+}
+.card-actions button {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.btn-delete {
+    background: rgba(244,63,94,0.1);
+    color: #f43f5e;
+    border: 1px solid rgba(244,63,94,0.2) !important;
+}
+.btn-delete:hover { background: #f43f5e; color: white; }
+.btn-view {
+    background: rgba(99,102,241,0.1);
+    color: #818cf8;
+    border: 1px solid rgba(99,102,241,0.2) !important;
+}
+.btn-view:hover { background: #6366f1; color: white; }
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #475569;
+    grid-column: 1 / -1;
+}
+.empty-state i { font-size: 3rem; margin-bottom: 16px; color: #334155; }
+.empty-state p { font-size: 0.95rem; }
+
+@media (max-width: 600px) {
+    .cards-container { grid-template-columns: 1fr; }
+    .content-toolbar { justify-content: stretch; }
+    .btn-primary { width: 100%; justify-content: center; }
+}

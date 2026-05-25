@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Teacher System</title>
+    <meta name="description" content="Teacher dashboard — manage assignments, quizzes, tasks and students">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="assignment.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+    <div class="topbar-left">
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+        <a href="teacherdashboard.html" class="brand-logo">
+            <div class="logo-icon-wrap">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <span class="brand-name">EduSystem</span>
+        </a>
+    </div>
+    <div class="topbar-right">
+        <div class="topbar-badge">
+            <i class="fa-solid fa-chalkboard-teacher"></i>
+            <span>Teacher</span>
+        </div>
+        <button class="logout-btn" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </button>
+    </div>
+</header>
+
+<div class="main">
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-section-label">Navigation</div>
+        <ul>
+            <li>
+                <div class="menu-left">
+                    <i class="fa-solid fa-house"></i>
+                    <a href="teacherdashboard.html"><span>Dashboard</span></a>
+                </div>
+            </li>
+            <li class="active">
+                <div class="menu-left">
+                    <i class="fa-solid fa-book-open"></i>
+                    <a href="./assignment.html"><span>Assignments</span></a>
+                </div>
+                <button class="add-btn" onclick="openForm()"><i class="fa-solid fa-plus"></i></button>
+            </li>
+            <li>
+                <div class="menu-left">
+                    <i class="fa-solid fa-clipboard-question"></i>
+                    <a href="./teacherquiz.html"><span>Quizzes</span></a>
+                </div>
+                <button class="add-btn" onclick="openQuizForm()"><i class="fa-solid fa-plus"></i></button>
+            </li>
+            <li>
+                <div class="menu-left">
+                    <i class="fa-solid fa-list-check"></i>
+                    <a href="./teachertasks.html"><span>Tasks</span></a>
+                </div>
+                <button class="add-btn" onclick="openTaskForm()"><i class="fa-solid fa-plus"></i></button>
+            </li>
+            <li>
+                <div class="menu-left">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <a href="./teacherstudent.html"><span>Students</span></a>
+                </div>
+            </li>
+            <li>
+                <div class="menu-left">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <a href="./teacherattendance.html"><span>Attendance</span></a>
+                </div>
+            </li>
+            <li>
+                <div class="menu-left">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Marks</span>
+                </div>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- CONTENT -->
+    <section class="content">
+        <div class="page-header">
+            <h2>📚 Assignments</h2>
+            <p>Create and manage class assignments</p>
+        </div>
+
+        <div class="welcome-card">
+            <h2>Welcome Khalid 👋</h2>
+            <p>Click + button to add data</p>
+        </div>
+    </section>
+</div>
+
+<!-- MODALS -->
+<div class="form-overlay" id="formOverlay" onclick="closeAllForms()"></div>
+
+<div class="assignment-form-modal" id="assignmentForm">
+    <div class="form-header">
+        <h3>Add Assignment</h3>
+        <button class="close-btn" onclick="closeAllForms()">×</button>
+    </div>
+    <form>
+        <input type="text" placeholder="Assignment Title" required>
+        <input type="text" placeholder="Subject" required>
+        <input type="date" required>
+        <input type="number" placeholder="Total Marks" min="1">
+        <textarea placeholder="Description (Optional)" rows="3"></textarea>
+        <button id="save" type="submit">Save Assignment</button>
+    </form>
+</div>
+
+<div class="assignment-form-modal" id="quizForm">
+    <div class="form-header">
+        <h3>Add Quiz</h3>
+        <button class="close-btn" onclick="closeAllForms()">×</button>
+    </div>
+    <form>
+        <input type="text" placeholder="Quiz Title" required>
+        <input type="text" placeholder="Subject" required>
+        <input type="number" placeholder="Total Questions" min="1" required>
+        <input type="number" placeholder="Total Marks" min="1">
+        <input type="date" placeholder="Quiz Date" required>
+        <button type="submit">Save Quiz</button>
+    </form>
+</div>
+
+<div class="assignment-form-modal" id="taskForm">
+    <div class="form-header">
+        <h3>Add Task</h3>
+        <button class="close-btn" onclick="closeAllForms()">×</button>
+    </div>
+    <form>
+        <input type="text" placeholder="Task Title" required>
+        <input type="text" placeholder="Subject" required>
+        <input type="date" placeholder="Due Date" required>
+        <textarea placeholder="Task Details (Optional)" rows="3"></textarea>
+        <button type="submit">Save Task</button>
+    </form>
+</div>
+
+<script>
+function openForm() {
+    closeAllForms();
+    document.getElementById('assignmentForm').classList.add('active');
+    document.getElementById('formOverlay').classList.add('active');
+}
+
+function openQuizForm() {
+    closeAllForms();
+    document.getElementById('quizForm').classList.add('active');
+    document.getElementById('formOverlay').classList.add('active');
+}
+
+function openTaskForm() {
+    closeAllForms();
+    document.getElementById('taskForm').classList.add('active');
+    document.getElementById('formOverlay').classList.add('active');
+}
+
+function closeAllForms() {
+    document.getElementById('assignmentForm').classList.remove('active');
+    document.getElementById('quizForm').classList.remove('active');
+    document.getElementById('taskForm').classList.remove('active');
+    document.getElementById('formOverlay').classList.remove('active');
+}
+
+function logout() {
+    window.location.href = "signin.html";
+}
+
+// Hamburger menu
+const hamburger = document.getElementById('hamburger');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebarOverlay');
+
+hamburger.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('active');
+});
+overlay.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+});
+</script>
+
+</body>
+</html>
