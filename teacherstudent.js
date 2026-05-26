@@ -123,7 +123,6 @@ ds.get().then((snap) => {
 
 });
 })
-require('dotenv').config();
 let api = "https://openrouter.ai/api/v1/chat/completions";
 let chatbotInput = document.querySelector("#chatbot-input");
 let chatbotMessages = document.querySelector("#chatbot-messages");
